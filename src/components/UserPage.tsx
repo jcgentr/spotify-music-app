@@ -21,6 +21,8 @@ const UserPage = (props: Props) => {
     getUserInfo();
   }, [props.token]);
 
+  if (user === defaultUser) return <div>Loading...</div>;
+
   return (
     <div>
       <h1>

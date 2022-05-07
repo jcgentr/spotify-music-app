@@ -25,16 +25,20 @@ const Playlists = (props: Props) => {
   }, [props.token]);
 
   return (
-    <div className="border p-1">
-      {playlists.map((playlist) => (
-        <div
-          className="cursor-pointer hover:bg-slate-500"
-          key={playlist.id}
-          onClick={() => setSelectedPlaylist(playlist)}
-        >
-          {playlist.name}
-        </div>
-      ))}
+    <div className="border p-1 flex">
+      <div className="w-1/3">
+        {playlists.map((playlist) => (
+          <div
+            className={`${
+              playlist.id === selectedPlaylist.id && "text-black bg-slate-300"
+            } cursor-pointer hover:bg-slate-500`}
+            key={playlist.id}
+            onClick={() => setSelectedPlaylist(playlist)}
+          >
+            {playlist.name}
+          </div>
+        ))}
+      </div>
       <Tracks token={props.token} tracksURL={selectedPlaylist.tracks.href} />
     </div>
   );
