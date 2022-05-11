@@ -25,33 +25,10 @@ const UserPage = (props: Props) => {
 
   return (
     <div>
-      <h1>
-        Logged in as <span className="font-bold">{user.display_name}</span>
-      </h1>
       <div>
-        <div>
-          <img alt="profile" width="150" src={user.images[0].url} />
-        </div>
-        <div className="my-8 border p-1">
-          <dl className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 text-sm">
-            <dt className="font-bold">Display name:</dt>
-            <dd>{user.display_name}</dd>
-
-            <dt className="font-bold">Id:</dt>
-            <dd>{user.id}</dd>
-
-            <dt className="font-bold">Email:</dt>
-            <dd>{user.email}</dd>
-
-            <dt className="font-bold">Country:</dt>
-            <dd>{user.country}</dd>
-
-            <dt className="font-bold">Followers:</dt>
-            <dd>{user.followers.total}</dd>
-
-            <dt className="font-bold">Subscription Type:</dt>
-            <dd>{user.type}</dd>
-          </dl>
+        <div id="profile-info-container">
+          <img alt="profile" id="profile-pic" src={user.images[0].url} />
+          <span id="profile-name">{user.display_name}</span>
         </div>
       </div>
       <Playlists token={props.token} />
