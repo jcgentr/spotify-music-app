@@ -4,10 +4,6 @@ export interface Playlist {
   external_urls: {
     spotify: string;
   };
-  followers: {
-    href: string;
-    total: number;
-  };
   href: string;
   id: string;
   images: [
@@ -52,10 +48,6 @@ export const defaultPlaylist: Playlist = {
   description: "",
   external_urls: {
     spotify: "",
-  },
-  followers: {
-    href: "",
-    total: 0,
   },
   href: "",
   id: "",
