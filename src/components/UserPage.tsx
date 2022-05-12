@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { defaultUser, User } from "../interfaces/User";
 import Playlists from "./Playlists";
+import Avatar from '@mui/material/Avatar';
 
 interface Props {
   token: string;
@@ -25,12 +26,10 @@ const UserPage = (props: Props) => {
 
   return (
     <div>
-      <div>
-        <div id="profile-info-container">
-          <img alt="profile" id="profile-pic" src={user.images[0].url} />
-          <span id="profile-name">{user.display_name}</span>
+        <div className="ml-5 pt-5 mb-5">
+          <Avatar id="profile-pic" alt="profile" src={user.images[0].url} />
+          <span className="inline-block align-sub ml-2">{user.display_name}</span>
         </div>
-      </div>
       <Playlists token={props.token} />
     </div>
   );
