@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { defaultPlaylist, Playlist } from "../interfaces/Playlist";
-import MuiTable from "./MuiTable";
+import PlaylistsTable from "./PlaylistsTable";
 import Tracks from "./Tracks";
 
 type Props = {
@@ -25,28 +25,37 @@ const Playlists = (props: Props) => {
     getUserPlaylists();
   }, [props.token]);
 
-  console.log(playlists);
-
   return (
-    <>
-      <div className="border p-1 flex">
-        <div className="w-1/3">
-          {playlists.map((playlist) => (
-            <div
-              className={`${
-                playlist.id === selectedPlaylist.id && "text-black bg-slate-300"
-              } cursor-pointer hover:bg-slate-500`}
-              key={playlist.id}
-              onClick={() => setSelectedPlaylist(playlist)}
+    <div>
+      {selectedPlaylist.id === defaultPlaylist.id ? (
+        <>
+          <h1 className="p-6 text-xl">Playlists</h1>
+          <PlaylistsTable
+            playlists={playlists}
+            handlePlaylistClick={(playlist: Playlist) =>
+              setSelectedPlaylist(playlist)
+            }
+          />
+        </>
+      ) : (
+        <>
+          <h1 className="p-6 text-xl">
+            <span
+              className="underline hover:no-underline cursor-pointer"
+              onClick={() => setSelectedPlaylist(defaultPlaylist)}
+              style={{ color: "#a64bc7" }}
             >
-              {playlist.name}
-            </div>
-          ))}
-        </div>
-        <Tracks token={props.token} tracksURL={selectedPlaylist.tracks.href} />
-      </div>
-      <MuiTable playlists={playlists} />
-    </>
+              {selectedPlaylist.name}
+            </span>{" "}
+            {">"} Tracks
+          </h1>
+          <Tracks
+            token={props.token}
+            tracksURL={selectedPlaylist.tracks.href}
+          />
+        </>
+      )}
+    </div>
   );
 };
 

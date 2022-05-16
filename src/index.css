@@ -78,4 +78,17 @@ h6 {
 #root,
 #__next {
   isolation: isolate;
+  height: 100%;
+}
+
+::-webkit-scrollbar {
+  background-color: black;
+  width: 1rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a64bc7;
+  border-radius: 1rem;
+  box-shadow: inset 2px 2px 2px hsl(0deg 0% 100% / 25%),
+    inset -2px -2px 2px rgb(0 0 0 / 25%);
 }

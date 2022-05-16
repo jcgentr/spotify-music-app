@@ -23,7 +23,7 @@ const TrackFeatures = (props: Props) => {
           }
         );
         const json = await response.json();
-        console.log(json);
+        console.log("features:", json);
         setTrackFeatures(json);
       }
     }
@@ -33,6 +33,7 @@ const TrackFeatures = (props: Props) => {
 
   return (
     <div className="border p-1 w-1/3">
+      {/* <h1 className="p-6 text-xl">{trackFeatures.}</h1> */}
       <div>Danceability: {trackFeatures.danceability}</div>
       <div>Energy: {trackFeatures.energy}</div>
       <div>Liveness: {trackFeatures.liveness}</div>

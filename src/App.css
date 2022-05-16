@@ -1,6 +1,6 @@
 body {
-  background-color: #333;
-  color: #eee;
+  background-color: black;
+  color: white;
   font-family: Helvetica, Arial;
 }
 
@@ -23,6 +23,6 @@ body {
 }
 
 #profile-pic {
-  display:inline-block;
+  display: inline-block;
   vertical-align: middle;
 }

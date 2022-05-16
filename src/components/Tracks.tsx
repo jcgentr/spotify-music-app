@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Track } from "../interfaces/Track";
 import TrackFeatures from "./TrackFeatures";
+import TracksTable from "./TracksTable";
 
 type Props = {
   token: string;
@@ -18,7 +19,7 @@ const Tracks = (props: Props) => {
           headers: { Authorization: "Bearer " + props.token },
         });
         const json = await response.json();
-        console.log(json.items);
+        console.log("tracks =>", json.items);
         setTracks(json.items);
       }
     }
@@ -27,22 +28,15 @@ const Tracks = (props: Props) => {
   }, [props.token, props.tracksURL]);
 
   return (
-    <>
-      <div className="border p-1 w-1/3">
-        {tracks.map(({ track }) => (
-          <div
-            className={`${
-              track.id === selectedTrackId && "text-black bg-slate-300"
-            } cursor-pointer hover:bg-slate-500 hover:text-white`}
-            key={track.id}
-            onClick={() => setSelectedTrackId(track.id)}
-          >
-            {track.name}
-          </div>
-        ))}
-      </div>
-      <TrackFeatures token={props.token} trackId={selectedTrackId} />
-    </>
+    <div className="flex">
+      <TracksTable
+        tracks={tracks}
+        handleTrackClick={(trackId: string) => setSelectedTrackId(trackId)}
+      />
+      {selectedTrackId !== "" && (
+        <TrackFeatures token={props.token} trackId={selectedTrackId} />
+      )}
+    </div>
   );
 };
 

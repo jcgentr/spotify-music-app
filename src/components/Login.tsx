@@ -1,11 +1,11 @@
 const Login = () => {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="h-full flex justify-center items-center">
+      <div>
         <a className="btn-spotify" href="/auth/login">
           Login with Spotify
         </a>
-      </header>
+      </div>
     </div>
   );
 };

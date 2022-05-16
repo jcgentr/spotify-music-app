@@ -6,7 +6,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
-import { Playlist } from "../interfaces/Playlist";
+import { Track } from "../interfaces/Track";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -25,22 +25,23 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 type Props = {
-  playlists: Playlist[];
+  tracks: Track[];
+  handleTrackClick: (trackId: string) => void;
 };
 
-export default function MuiTable(props: Props) {
+export default function TracksTable(props: Props) {
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    <TableContainer component={Paper} sx={{ maxHeight: "70vh" }}>
+      <Table sx={{ minWidth: 650 }} stickyHeader aria-label="sticky table">
         <TableHead>
           <TableRow>
             <StyledTableCell>Name</StyledTableCell>
-            <StyledTableCell>Owner</StyledTableCell>
+            <StyledTableCell>Popularity</StyledTableCell>
             <StyledTableCell>Open in Spotify</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.playlists.map((playlist) => (
+          {props.tracks.map(({ track }) => (
             <TableRow
               sx={{
                 cursor: "pointer",
@@ -51,22 +52,21 @@ export default function MuiTable(props: Props) {
                 },
               }}
               hover
-              //   selected={playlist.id === props.selectedPlaylistId}
-              key={playlist.id}
-              onClick={() => console.log("clicking...", playlist.name)}
+              key={track.id}
+              onClick={() => props.handleTrackClick(track.id)}
             >
               <StyledTableCell component="th" scope="row">
-                {playlist.name}
+                {track.name}
               </StyledTableCell>
-              <StyledTableCell>{playlist.owner.display_name}</StyledTableCell>
+              <StyledTableCell>{track.popularity}</StyledTableCell>
               <StyledTableCell>
                 <a
                   className="underline hover:no-underline"
-                  href={playlist.external_urls.spotify}
+                  href={track.external_urls.spotify}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {playlist.external_urls.spotify}
+                  {track.external_urls.spotify}
                 </a>
               </StyledTableCell>
             </TableRow>
